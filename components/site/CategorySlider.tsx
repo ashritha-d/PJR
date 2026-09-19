@@ -16,13 +16,14 @@ export function CategorySlider({ categories }: { categories: CategorySliderItem[
     <HorizontalSlider
       items={categories}
       ariaLabel="categories"
-      itemClassName="w-[260px] sm:w-[300px] lg:w-[320px]"
+      itemClassName="w-[170px] sm:w-[155px] lg:w-[140px]"
       renderItem={(category) => (
         <CategoryCard
           name={category.name}
           slug={category.slug}
           description={category.description}
           image={category.image}
+          compact
         />
       )}
     />

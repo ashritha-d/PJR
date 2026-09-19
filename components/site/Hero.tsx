@@ -35,33 +35,33 @@ export function Hero({ slides }: { slides: HeroSlide[] }) {
         <div className="absolute inset-0 bg-gradient-to-t from-forest-900/60 via-transparent to-transparent" />
       </div>
 
-      <Leaf className="animate-float absolute left-[8%] top-[20%] hidden text-forest-500/30 sm:block" size={64} />
-      <Leaf className="animate-float absolute right-[12%] top-[55%] hidden text-gold/20 sm:block" size={48} style={{ animationDelay: "2s" }} />
-      <Leaf className="animate-float absolute left-[20%] bottom-[10%] hidden text-forest-400/20 sm:block" size={40} style={{ animationDelay: "4s" }} />
+      <Leaf className="animate-float absolute left-[8%] top-[15%] hidden text-forest-500/30 sm:block" size={44} />
+      <Leaf className="animate-float absolute right-[12%] top-[50%] hidden text-gold/20 sm:block" size={34} style={{ animationDelay: "2s" }} />
+      <Leaf className="animate-float absolute left-[20%] bottom-[10%] hidden text-forest-400/20 sm:block" size={28} style={{ animationDelay: "4s" }} />
 
-      <div className="container-page relative flex min-h-[560px] flex-col justify-center py-20 sm:min-h-[620px]">
+      <div className="container-page relative flex min-h-[260px] flex-col justify-center py-6 sm:min-h-[300px] sm:py-8">
         <div className="max-w-2xl">
           <Image
             src="/brand/logo-emblem.jpg"
             alt="PJR Farm emblem"
-            width={72}
-            height={72}
-            className="mb-6 h-16 w-16 rounded-full border-2 border-gold object-cover"
+            width={48}
+            height={48}
+            className="mb-2 h-11 w-11 rounded-full border-2 border-gold object-cover"
           />
-          <span className="mb-4 inline-block rounded-full bg-gold/20 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-gold-light">
+          <span className="mb-2 inline-block rounded-full bg-gold/20 px-3 py-1 text-[11px] font-semibold uppercase tracking-widest text-gold-light">
             Est. 2017 &middot; Integrated Farming
           </span>
-          <h1 className="font-display text-4xl font-bold leading-tight text-cream-100 sm:text-5xl lg:text-6xl">
+          <h1 className="font-display text-2xl font-bold leading-tight text-cream-100 sm:text-3xl lg:text-4xl">
             {slide.title}
           </h1>
-          <p className="mt-5 max-w-xl text-base text-cream-300 sm:text-lg">{slide.subtitle}</p>
+          <p className="mt-2 max-w-xl text-sm text-cream-300 sm:text-base">{slide.subtitle}</p>
 
-          <div className="mt-8 flex flex-wrap gap-4">
-            <Link href={slide.buttonLink || "/products"} className="btn-gold">
+          <div className="mt-4 flex flex-wrap gap-3">
+            <Link href={slide.buttonLink || "/products"} className="btn-gold !px-5 !py-2.5 !text-sm">
               {slide.buttonText || "Shop Fresh Products"}
             </Link>
             {slide.buttonLink !== "/our-farming" && (
-              <Link href="/our-farming" className="btn-secondary !border-cream-100 !text-cream-100 hover:!bg-cream-100 hover:!text-forest-900">
+              <Link href="/our-farming" className="btn-secondary !border-cream-100 !px-5 !py-2.5 !text-sm !text-cream-100 hover:!bg-cream-100 hover:!text-forest-900">
                 Explore Our Farm
               </Link>
             )}
@@ -70,7 +70,7 @@ export function Hero({ slides }: { slides: HeroSlide[] }) {
       </div>
 
       {slides.length > 1 && (
-        <div className="absolute bottom-6 right-6 flex items-center gap-2">
+        <div className="absolute bottom-3 right-4 flex items-center gap-2">
           <button
             onClick={() => setIndex((i) => (i - 1 + slides.length) % slides.length)}
             className="rounded-full bg-white/10 p-2 text-cream-100 backdrop-blur hover:bg-white/20"

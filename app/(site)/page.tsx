@@ -49,21 +49,21 @@ export default async function HomePage() {
     <>
       <Hero slides={slides} />
 
-      <section className="py-20">
+      <section className="py-6 sm:py-8">
         <div className="container-page">
-          <div className="flex flex-wrap items-end justify-between gap-4">
+          <div className="flex flex-wrap items-end justify-between gap-3">
             <div>
-              <h2 className="section-heading">Our Farming Ecosystem</h2>
-              <p className="section-subheading">
+              <h2 className="section-heading-compact">Our Farming Ecosystem</h2>
+              <p className="section-subheading-compact">
                 An integrated farm producing everything from crops to livestock, working together as one sustainable ecosystem.
               </p>
             </div>
-            <Link href="/our-farming" className="hidden items-center gap-1.5 font-semibold text-forest-700 hover:text-forest-900 sm:flex">
-              Learn how it works <ArrowRight size={16} />
+            <Link href="/our-farming" className="hidden items-center gap-1.5 text-sm font-semibold text-forest-700 hover:text-forest-900 sm:flex">
+              Learn how it works <ArrowRight size={14} />
             </Link>
           </div>
 
-          <div className="mt-10">
+          <div className="mt-4">
             <CategorySlider
               categories={categories.map((c) => ({
                 id: c.id,
@@ -78,16 +78,21 @@ export default async function HomePage() {
       </section>
 
       {allProducts.length > 0 && (
-        <section className="bg-forest-50/60 py-16">
+        <section className="bg-forest-50/60 py-6 sm:py-8">
           <div className="container-page">
-            <div className="text-center">
-              <h2 className="section-heading">Fresh From PJR Farm</h2>
-              <p className="section-subheading mx-auto">
-                Every product we grow and produce, in one place — swipe or use the arrows to browse.
-              </p>
+            <div className="flex flex-wrap items-end justify-between gap-3">
+              <div>
+                <h2 className="section-heading-compact">Fresh From PJR Farm</h2>
+                <p className="section-subheading-compact">
+                  Every product we grow and produce, in one place — swipe or use the arrows to browse.
+                </p>
+              </div>
+              <Link href="/products" className="hidden items-center gap-1.5 text-sm font-semibold text-forest-700 hover:text-forest-900 sm:flex">
+                View All Products <ArrowRight size={14} />
+              </Link>
             </div>
 
-            <div className="mt-10">
+            <div className="mt-4">
               <ProductSlider
                 products={allProducts.map((p) => ({
                   id: p.id,
@@ -108,9 +113,9 @@ export default async function HomePage() {
               />
             </div>
 
-            <div className="mt-10 text-center">
-              <Link href="/products" className="btn-primary">
-                View All Products <ArrowRight size={16} />
+            <div className="mt-3 text-center sm:hidden">
+              <Link href="/products" className="btn-primary !px-5 !py-2 !text-xs">
+                View All Products <ArrowRight size={12} />
               </Link>
             </div>
           </div>

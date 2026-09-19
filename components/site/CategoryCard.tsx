@@ -1,21 +1,29 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export function CategoryCard({
   name,
   slug,
   description,
   image,
+  compact = false,
 }: {
   name: string;
   slug: string;
   description: string;
   image: string;
+  compact?: boolean;
 }) {
   return (
     <div className="card group overflow-hidden">
-      <div className="relative aspect-[4/3] w-full overflow-hidden bg-forest-50">
+      <div
+        className={cn(
+          "relative w-full overflow-hidden bg-forest-50",
+          compact ? "aspect-[16/10]" : "aspect-[4/3]"
+        )}
+      >
         <Image
           src={image}
           alt={name}
@@ -24,17 +32,25 @@ export function CategoryCard({
           className="object-cover transition duration-500 group-hover:scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-forest-900/70 via-forest-900/10 to-transparent" />
-        <h3 className="absolute bottom-4 left-4 font-display text-xl font-bold text-cream-100">
+        <h3
+          className={cn(
+            "absolute font-display font-bold text-cream-100",
+            compact ? "bottom-2 left-3 text-sm" : "bottom-4 left-4 text-xl"
+          )}
+        >
           {name}
         </h3>
       </div>
-      <div className="p-5">
-        <p className="text-sm text-forest-500 line-clamp-2">{description}</p>
+      <div className={compact ? "p-3" : "p-5"}>
+        <p className={cn("text-forest-500 line-clamp-2", compact ? "text-xs" : "text-sm")}>{description}</p>
         <Link
           href={`/categories/${slug}`}
-          className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-forest-700 hover:text-forest-900"
+          className={cn(
+            "inline-flex items-center gap-1.5 font-semibold text-forest-700 hover:text-forest-900",
+            compact ? "mt-1.5 text-xs" : "mt-4 text-sm"
+          )}
         >
-          Explore Products <ArrowRight size={16} />
+          Explore Products <ArrowRight size={compact ? 12 : 16} />
         </Link>
       </div>
     </div>
