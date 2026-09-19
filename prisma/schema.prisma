@@ -3,14 +3,15 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-// NOTE: SQLite has no native enum support in Prisma, so status/type fields below
-// are plain Strings. The allowed values for each are documented in lib/constants.ts
-// and enforced in application code (zod schemas + API handlers), not the DB schema.
-// Swapping to Postgres later lets these become real Prisma enums if desired.
+// NOTE: status/type fields below are plain Strings rather than native Prisma enums.
+// The allowed values for each are documented in lib/constants.ts and enforced in
+// application code (zod schemas + API handlers), not the DB schema. This keeps the
+// schema portable across SQLite (local dev) and Postgres (production) without
+// maintaining two schema variants.
 
 // ------------------------- Core -------------------------
 

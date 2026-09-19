@@ -18,3 +18,13 @@ Thumbs.db
 /images/
 /*.pdf
 .kilo/
+
+.vercel
+.env*
+!.env.example
+
+# Personal documents that have appeared at the project root (not app assets —
+# never commit these regardless of filename/extension).
+/*.jpeg
+/*.jpg
+/*.png
