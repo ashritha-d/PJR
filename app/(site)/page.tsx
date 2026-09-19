@@ -3,7 +3,7 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { Hero, type HeroSlide } from "@/components/site/Hero";
-import { CategoryCard } from "@/components/site/CategoryCard";
+import { CategorySlider } from "@/components/site/CategorySlider";
 import { ProductSlider } from "@/components/site/ProductSlider";
 import { WhyChooseUs } from "@/components/site/WhyChooseUs";
 import { Testimonials } from "@/components/site/Testimonials";
@@ -63,16 +63,16 @@ export default async function HomePage() {
             </Link>
           </div>
 
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {categories.map((c) => (
-              <CategoryCard
-                key={c.id}
-                name={c.name}
-                slug={c.slug}
-                description={c.description}
-                image={getHomeSafeImage(c.image)}
-              />
-            ))}
+          <div className="mt-10">
+            <CategorySlider
+              categories={categories.map((c) => ({
+                id: c.id,
+                name: c.name,
+                slug: c.slug,
+                description: c.description,
+                image: getHomeSafeImage(c.image),
+              }))}
+            />
           </div>
         </div>
       </section>
