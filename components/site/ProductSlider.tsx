@@ -9,7 +9,7 @@ export function ProductSlider({ products }: { products: ProductCardData[] }) {
     <HorizontalSlider
       items={products}
       ariaLabel="products"
-      itemClassName="w-[145px] sm:w-[135px] lg:w-[125px]"
+      itemClassName="w-[190px] sm:w-[210px] lg:w-[225px]"
       renderItem={(product) => <ProductCard product={product} compact />}
     />
   );

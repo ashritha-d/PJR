@@ -16,7 +16,7 @@ export function CategorySlider({ categories }: { categories: CategorySliderItem[
     <HorizontalSlider
       items={categories}
       ariaLabel="categories"
-      itemClassName="w-[170px] sm:w-[155px] lg:w-[140px]"
+      itemClassName="w-[230px] sm:w-[260px] lg:w-[290px]"
       renderItem={(category) => (
         <CategoryCard
           name={category.name}
