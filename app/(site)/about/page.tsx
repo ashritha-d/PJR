@@ -11,22 +11,15 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div>
-      <section className="relative overflow-hidden bg-forest-900 py-20 text-center text-cream-100">
+      <section className="relative overflow-hidden bg-forest-900 py-12 text-center text-cream-100">
         <div className="container-page relative">
           <Image
             src="/brand/logo-emblem.jpg"
             alt="PJR Farm emblem"
             width={80}
             height={80}
-            className="mx-auto mb-6 h-20 w-20 rounded-full border-2 border-gold object-cover"
+            className="mx-auto h-20 w-20 rounded-full border-2 border-gold object-cover"
           />
-          <h1 className="mx-auto max-w-3xl font-display text-3xl font-bold sm:text-4xl">
-            Rooted in Tradition. Driven by Sustainability. Committed to Quality.
-          </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-cream-300">
-            Established in 2017, PJR Farm &amp; Agro Products is an integrated farming enterprise dedicated to
-            producing wholesome and naturally grown agricultural products through responsible farming practices.
-          </p>
         </div>
       </section>
 

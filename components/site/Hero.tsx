@@ -8,7 +8,6 @@ import { ChevronLeft, ChevronRight, Leaf } from "lucide-react";
 export type HeroSlide = {
   title: string;
   subtitle: string;
-  image: string;
   buttonText?: string | null;
   buttonLink?: string | null;
 };
@@ -28,14 +27,12 @@ export function Hero({ slides }: { slides: HeroSlide[] }) {
   return (
     <section className="relative overflow-hidden bg-forest-900">
       <div className="absolute inset-0">
-        <Image
-          src={slide.image}
-          alt={slide.title}
-          fill
-          priority
-          className="object-cover opacity-50 transition-all duration-700"
+        <div className="absolute inset-0 bg-gradient-to-br from-forest-900 via-forest-800 to-forest-700" />
+        <div
+          className="absolute inset-0 opacity-[0.15]"
+          style={{ backgroundImage: "url('/brand/leaf-pattern.svg')", backgroundSize: "220px" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-forest-900/95 via-forest-900/70 to-forest-900/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-forest-900/60 via-transparent to-transparent" />
       </div>
 
       <Leaf className="animate-float absolute left-[8%] top-[20%] hidden text-forest-500/30 sm:block" size={64} />

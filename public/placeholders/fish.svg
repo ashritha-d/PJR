@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#eaf6f6"/>
+      <stop offset="100%" stop-color="#dbeef0"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#g)"/>
+  <circle cx="200" cy="200" r="150" fill="#1f6f78" opacity="0.08"/>
+  <g transform="translate(200,205)">
+    <path d="M -70 0 C -70 -35 -20 -55 30 -30 L 60 -50 L 50 0 L 60 50 L 30 30 C -20 55 -70 35 -70 0 Z" fill="#2b8a94"/>
+    <circle cx="-40" cy="-8" r="6" fill="#eaf6f6"/>
+    <path d="M -10 0 L -32 -18 L -32 18 Z" fill="#1f6f78" opacity="0.7"/>
+    <path d="M -95 20 Q -85 0 -95 -20" stroke="#2b8a94" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.6"/>
+    <path d="M -110 30 Q -98 0 -110 -30" stroke="#2b8a94" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.35"/>
+  </g>
+  <path d="M 90 300 Q 130 285 170 300 T 250 300 T 330 300" stroke="#1f6f78" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.3"/>
+  <text x="200" y="355" text-anchor="middle" font-family="Georgia, serif" font-size="22" fill="#2d4d26" font-weight="bold">Pisciculture</text>
+</svg>

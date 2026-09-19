@@ -4,20 +4,22 @@ import { ArrowRight } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { Hero, type HeroSlide } from "@/components/site/Hero";
 import { CategoryCard } from "@/components/site/CategoryCard";
-import { ProductCard } from "@/components/site/ProductCard";
+import { ProductSlider } from "@/components/site/ProductSlider";
 import { WhyChooseUs } from "@/components/site/WhyChooseUs";
 import { Testimonials } from "@/components/site/Testimonials";
+import { getHomeSafeImage } from "@/lib/home-safe-image";
 
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  const [banners, homepageContent, categories, featuredProducts] = await Promise.all([
+  const [banners, homepageContent, categories, allProducts] = await Promise.all([
     prisma.banner.findMany({ where: { status: "ACTIVE" }, orderBy: { displayOrder: "asc" } }),
     prisma.homepageContent.findUnique({ where: { id: "singleton" } }),
     prisma.category.findMany({ where: { status: "ACTIVE" }, orderBy: { displayOrder: "asc" } }),
     prisma.product.findMany({
-      where: { status: "ACTIVE", isFeatured: true },
-      take: 8,
+      where: { status: "ACTIVE" },
+      orderBy: [{ isFeatured: "desc" }, { createdAt: "desc" }],
+      take: 40,
       include: { category: { select: { name: true } }, images: { orderBy: { order: "asc" }, take: 1 } },
     }),
   ]);
@@ -26,7 +28,6 @@ export default async function HomePage() {
     ? banners.map((b) => ({
         title: b.title,
         subtitle: b.subtitle ?? "",
-        image: b.image,
         buttonText: b.buttonText,
         buttonLink: b.buttonLink,
       }))
@@ -35,7 +36,6 @@ export default async function HomePage() {
         {
           title: homepageContent.heroHeading,
           subtitle: homepageContent.heroSubheading,
-          image: homepageContent.heroImage,
           buttonText: "Shop Fresh Products",
           buttonLink: "/products",
         },
@@ -65,44 +65,47 @@ export default async function HomePage() {
 
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {categories.map((c) => (
-              <CategoryCard key={c.id} name={c.name} slug={c.slug} description={c.description} image={c.image} />
+              <CategoryCard
+                key={c.id}
+                name={c.name}
+                slug={c.slug}
+                description={c.description}
+                image={getHomeSafeImage(c.image)}
+              />
             ))}
           </div>
         </div>
       </section>
 
-      {featuredProducts.length > 0 && (
-        <section className="bg-forest-50/60 py-20">
+      {allProducts.length > 0 && (
+        <section className="bg-forest-50/60 py-16">
           <div className="container-page">
             <div className="text-center">
               <h2 className="section-heading">Fresh From PJR Farm</h2>
               <p className="section-subheading mx-auto">
-                Hand-picked, farm-fresh favourites delivered straight from our fields, ponds and sheds to your door.
+                Every product we grow and produce, in one place — swipe or use the arrows to browse.
               </p>
             </div>
 
-            <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-              {featuredProducts.map((p) => (
-                <ProductCard
-                  key={p.id}
-                  product={{
-                    id: p.id,
-                    name: p.name,
-                    slug: p.slug,
-                    categoryName: p.category.name,
-                    description: p.description,
-                    price: p.price,
-                    discountPrice: p.discountPrice,
-                    unit: p.unit,
-                    weight: p.weight,
-                    availability: p.availability,
-                    stock: p.stock,
-                    ratingAvg: p.ratingAvg,
-                    ratingCount: p.ratingCount,
-                    image: p.images[0]?.url ?? "",
-                  }}
-                />
-              ))}
+            <div className="mt-10">
+              <ProductSlider
+                products={allProducts.map((p) => ({
+                  id: p.id,
+                  name: p.name,
+                  slug: p.slug,
+                  categoryName: p.category.name,
+                  description: p.description,
+                  price: p.price,
+                  discountPrice: p.discountPrice,
+                  unit: p.unit,
+                  weight: p.weight,
+                  availability: p.availability,
+                  stock: p.stock,
+                  ratingAvg: p.ratingAvg,
+                  ratingCount: p.ratingCount,
+                  image: getHomeSafeImage(p.images[0]?.url ?? ""),
+                }))}
+              />
             </div>
 
             <div className="mt-10 text-center">
@@ -135,8 +138,8 @@ export default async function HomePage() {
             </div>
             <div className="relative aspect-video overflow-hidden rounded-2xl">
               <Image
-                src="/farm/pisciculture-farmer-portrait.jpg"
-                alt="PJR Farm team at our aquaculture pond"
+                src="/products/pjr-organic-rice-1.jpg"
+                alt="PJR Farm organic rice, grown on our own fields"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"

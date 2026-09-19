@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { getSiteSettings, parseSocialLinks } from "@/lib/settings";
 import { Navbar } from "@/components/site/Navbar";
-import { Footer } from "@/components/site/Footer";
+import { ConditionalFooter } from "@/components/site/ConditionalFooter";
 import { WhatsAppButton } from "@/components/site/WhatsAppButton";
 
 export const dynamic = "force-dynamic";
@@ -22,7 +22,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
     <div className="flex min-h-screen flex-col">
       <Navbar businessName={settings.businessName} categories={categories} />
       <main className="flex-1">{children}</main>
-      <Footer
+      <ConditionalFooter
         businessName={settings.businessName}
         tagline={settings.tagline}
         phone={settings.phone}

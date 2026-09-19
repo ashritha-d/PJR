@@ -6,6 +6,11 @@ html {
   scroll-behavior: smooth;
 }
 
+html,
+body {
+  @apply overflow-x-hidden;
+}
+
 body {
   @apply bg-cream-200 text-forest-900 font-body antialiased;
 }
@@ -67,4 +72,13 @@ body {
 
 .skeleton {
   @apply animate-pulse bg-forest-100 rounded-xl;
+}
+
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
 }
