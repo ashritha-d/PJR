@@ -4,7 +4,9 @@
 
 A complete, production-structured e-commerce platform for PJR Farm & Agro Products — an integrated farming enterprise (crop cultivation, dairy farming, fresh vegetables, pisciculture, poultry farming, and livestock rearing) established in 2017. The platform includes a full customer storefront and a separate, role-protected admin dashboard.
 
-> **Note on stack:** this project uses **Next.js + Prisma/SQL** (not MongoDB) and ships as a single unified codebase rather than separate frontend/backend services — the sections below are organized to answer the same questions (how to run the UI, how the API layer works, how the database is configured) for that architecture.
+**Live deployment:** [https://pjr-farm-agro.vercel.app](https://pjr-farm-agro.vercel.app) (Vercel, backed by a Neon Postgres database).
+
+> **Note on stack:** this project uses **Next.js + Prisma/PostgreSQL** (not MongoDB) and ships as a single unified codebase rather than separate frontend/backend services — the sections below are organized to answer the same questions (how to run the UI, how the API layer works, how the database is configured) for that architecture.
 
 ## Table of Contents
 
@@ -44,7 +46,7 @@ PJR Farm & Agro Products sells fresh, farm-produced goods (eggs, milk, paneer, v
 | Layer | Technology |
 |---|---|
 | Framework | Next.js 15 (App Router, TypeScript) — serves both the UI and the API |
-| Database / ORM | SQLite + Prisma ORM (swap to Postgres/MySQL by changing one env var) |
+| Database / ORM | PostgreSQL (Neon in production) + Prisma ORM |
 | Authentication | NextAuth.js (Credentials provider, JWT sessions) + bcryptjs |
 | Styling | Tailwind CSS (custom PJR brand theme) |
 | Validation | Zod (shared client + server schemas) |
@@ -80,13 +82,16 @@ git clone https://github.com/ashritha-d/PJR.git
 cd PJR
 npm install
 cp .env.example .env
-# edit .env — at minimum set NEXTAUTH_SECRET (see Environment Variables below)
+# edit .env — set DATABASE_URL to a Postgres connection string and NEXTAUTH_SECRET
+# (see Database Configuration and Environment Variables below)
 npm run db:migrate
 npm run db:seed
 npm run dev
 ```
 
 The app is now running at [http://localhost:3000](http://localhost:3000).
+
+You need a Postgres database even for local development (see [Database Configuration](#database-configuration)) — the quickest way is a free [Neon](https://neon.tech) project, since that's what production uses too.
 
 ## Frontend Setup
 
@@ -112,15 +117,15 @@ No separate backend installation step is needed — it's installed and started a
 
 ## Database Configuration
 
-This project uses **SQLite via Prisma** for local development — a single file database with zero external setup, defined by `prisma/schema.prisma` and configured entirely through the `DATABASE_URL` environment variable.
+This project uses **PostgreSQL via Prisma**, configured entirely through the `DATABASE_URL` environment variable (`prisma/schema.prisma`'s `datasource db` block declares `provider = "postgresql"`). Production runs on [Neon](https://neon.tech) (serverless Postgres, provisioned through Vercel's marketplace integration); local development can point at the same Neon project or a separate one (e.g. a Neon branch, or any other Postgres instance — a local Docker Postgres works too).
 
 ```bash
-npm run db:migrate   # create/apply the schema (first run) — creates prisma/dev.db
+npm run db:migrate   # create/apply the schema (first run)
 npm run db:seed      # load demo categories, products, a sample order, coupon, banners, settings
-npm run db:reset     # drop, recreate, and reseed the database (destructive — local dev only)
+npm run db:reset     # drop, recreate, and reseed the database (destructive)
 ```
 
-**Moving to Postgres/MySQL for production:** change the `provider` in `prisma/schema.prisma`'s `datasource db` block (`sqlite` → `postgresql` or `mysql`) and point `DATABASE_URL` at your managed database (e.g. Supabase, Neon, Railway, PlanetScale). No application code changes are required — all data access goes through Prisma.
+**Note:** this project previously used SQLite for zero-setup local development. It was switched to Postgres because Vercel's serverless functions have no persistent, writable filesystem for a SQLite file — every write would be lost (or fail) between requests. If you want a fully local, offline dev database again, you can point `DATABASE_URL` at a local Postgres instance instead of Neon; just switch back `provider = "sqlite"` and point `DATABASE_URL` at `file:./dev.db` for a throwaway local-only setup (you'd then need a separate build step to swap it back for deployment).
 
 ## Environment Variables
 
@@ -128,7 +133,7 @@ Copy `.env.example` to `.env` and fill in the values you have. **Never commit `.
 
 | Variable | Required | Purpose |
 |---|---|---|
-| `DATABASE_URL` | Yes | Prisma database connection string (`file:./dev.db` for local SQLite) |
+| `DATABASE_URL` | Yes | Prisma Postgres connection string (e.g. from Neon, Supabase, Railway) |
 | `NEXTAUTH_SECRET` | Yes | Secret used to sign session JWTs — generate with `openssl rand -base64 32` |
 | `NEXTAUTH_URL` | Yes | Base URL of the deployed app (`http://localhost:3000` locally) |
 | `EMAIL_SERVER` / `EMAIL_FROM` | No | SMTP provider for password-reset emails (currently the reset link is shown on-screen instead) |
@@ -159,11 +164,17 @@ Run `npm run db:migrate` (or the equivalent `prisma migrate deploy` in a CI/CD p
 
 ## Deployment
 
-This is a standard Next.js app and deploys to any Node-compatible host:
+**Current production deployment:** [https://pjr-farm-agro.vercel.app](https://pjr-farm-agro.vercel.app), on Vercel, connected to this GitHub repo's `main` branch (every push redeploys automatically), backed by a Neon Postgres database installed via Vercel's marketplace integration.
 
-1. **Vercel** (simplest): import the GitHub repo, set the environment variables from the table above in the project settings, and set `DATABASE_URL` to a hosted Postgres/MySQL instance (SQLite's local file won't persist on serverless hosts). Vercel runs `npm run build` automatically.
-2. **Any Node host / VPS / container**: `npm ci && npm run build && npm run start`, behind a reverse proxy (e.g. Nginx) with your environment variables set.
-3. Whichever host you choose, run migrations against the production database (`npx prisma migrate deploy`) as part of your deploy step, and set `NEXTAUTH_URL` to your production URL.
+To reproduce this setup for your own Vercel account:
+
+1. `vercel link` the project (or import the GitHub repo from the Vercel dashboard) — this creates a Vercel project and connects it to this repo for auto-deploys on push.
+2. Add a Postgres database: in the Vercel dashboard, add the **Neon** integration (or any other Postgres) to the project — this injects `DATABASE_URL` and related env vars automatically. (Via CLI: `vercel integration add neon`, then `vercel integration-resource connect <resource> <project> --yes`; installing a *new* marketplace integration requires accepting its terms in the browser once, per Vercel's account-owner consent flow.)
+3. Add `NEXTAUTH_SECRET` (`openssl rand -base64 32`) and `NEXTAUTH_URL` (your production URL) as project environment variables.
+4. Run `npm run db:migrate` and `npm run db:seed` locally against that same `DATABASE_URL` to set up the schema and demo data (or use `npx prisma migrate deploy` in a CI/CD step).
+5. Deploy: `vercel --prod`, or just push to `main`.
+
+This also runs on any other Node-compatible host: `npm ci && npm run build && npm run start` behind a reverse proxy, with the same environment variables and a `prisma migrate deploy` step before first start.
 
 ## Demo Accounts
 
