@@ -41,16 +41,18 @@ export function Hero({ slides }: { slides: HeroSlide[] }) {
 
       <div className="container-page relative flex min-h-[150px] flex-col justify-center py-3 sm:min-h-[165px] sm:py-3.5">
         <div className="max-w-3xl">
-          <Image
-            src="/brand/logo-emblem.jpg"
-            alt="PJR Farm emblem"
-            width={48}
-            height={48}
-            className="mb-1 h-11 w-11 rounded-full border-2 border-gold object-cover"
-          />
-          <span className="mb-1 inline-block rounded-full bg-gold/20 px-3 py-1 text-[11px] font-semibold uppercase tracking-widest text-gold-light">
-            Est. 2017 &middot; Integrated Farming
-          </span>
+          <div className="mb-1 flex items-center gap-2">
+            <Image
+              src="/brand/logo-emblem.jpg"
+              alt="PJR Farm emblem"
+              width={48}
+              height={48}
+              className="h-11 w-11 shrink-0 rounded-full border-2 border-gold object-cover"
+            />
+            <span className="inline-block rounded-full bg-gold/20 px-3 py-1 text-[11px] font-semibold uppercase tracking-widest text-gold-light">
+              Est. 2017 &middot; Integrated Farming
+            </span>
+          </div>
           <h1 className="font-display text-2xl font-bold leading-tight text-cream-100 sm:text-3xl lg:text-4xl">
             {slide.title}
           </h1>
