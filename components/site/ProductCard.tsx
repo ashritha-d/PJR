@@ -65,7 +65,7 @@ export function ProductCard({
 
       <Link
         href={`/products/${product.slug}`}
-        className={cn("relative block w-full overflow-hidden bg-forest-50", compact ? "aspect-[3/2]" : "aspect-square")}
+        className={cn("relative block w-full overflow-hidden bg-forest-50", compact ? "aspect-[16/9]" : "aspect-square")}
       >
         <Image
           src={product.image || "/placeholders/vegetables.svg"}
@@ -83,7 +83,7 @@ export function ProductCard({
         )}
       </Link>
 
-      <div className={cn("flex flex-1 flex-col", compact ? "gap-0.5 p-2" : "gap-1.5 p-4")}>
+      <div className={cn("flex flex-1 flex-col", compact ? "gap-0.5 p-1.5" : "gap-1.5 p-4")}>
         <span className={cn("font-medium uppercase tracking-wide text-gold-dark", compact ? "text-[10px]" : "text-xs")}>
           {product.categoryName}
         </span>

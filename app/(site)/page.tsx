@@ -49,7 +49,7 @@ export default async function HomePage() {
     <>
       <Hero slides={slides} />
 
-      <section className="py-4 sm:py-5">
+      <section className="py-3 sm:py-4">
         <div className="container-page">
           <div className="flex flex-wrap items-end justify-between gap-3">
             <div>
@@ -63,7 +63,7 @@ export default async function HomePage() {
             </Link>
           </div>
 
-          <div className="mt-3">
+          <div className="mt-2">
             <CategorySlider
               categories={categories.map((c) => ({
                 id: c.id,
@@ -78,7 +78,7 @@ export default async function HomePage() {
       </section>
 
       {allProducts.length > 0 && (
-        <section className="bg-forest-50/60 py-4 sm:py-5">
+        <section className="bg-forest-50/60 py-3 sm:py-4">
           <div className="container-page">
             <div className="flex flex-wrap items-end justify-between gap-3">
               <div>
@@ -92,7 +92,7 @@ export default async function HomePage() {
               </Link>
             </div>
 
-            <div className="mt-3">
+            <div className="mt-2">
               <ProductSlider
                 products={allProducts.map((p) => ({
                   id: p.id,

@@ -21,7 +21,7 @@ export function CategoryCard({
       <div
         className={cn(
           "relative w-full overflow-hidden bg-forest-50",
-          compact ? "aspect-[2/1]" : "aspect-[4/3]"
+          compact ? "aspect-[12/5]" : "aspect-[4/3]"
         )}
       >
         <Image
@@ -41,7 +41,7 @@ export function CategoryCard({
           {name}
         </h3>
       </div>
-      <div className={compact ? "p-2.5" : "p-5"}>
+      <div className={compact ? "p-2" : "p-5"}>
         <p className={cn("text-forest-500 line-clamp-2", compact ? "text-xs" : "text-sm")}>{description}</p>
         <Link
           href={`/categories/${slug}`}
