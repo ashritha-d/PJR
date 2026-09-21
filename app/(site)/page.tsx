@@ -49,7 +49,7 @@ export default async function HomePage() {
     <>
       <Hero slides={slides} />
 
-      <section className="py-6 sm:py-8">
+      <section className="py-4 sm:py-5">
         <div className="container-page">
           <div className="flex flex-wrap items-end justify-between gap-3">
             <div>
@@ -63,7 +63,7 @@ export default async function HomePage() {
             </Link>
           </div>
 
-          <div className="mt-4">
+          <div className="mt-3">
             <CategorySlider
               categories={categories.map((c) => ({
                 id: c.id,
@@ -78,7 +78,7 @@ export default async function HomePage() {
       </section>
 
       {allProducts.length > 0 && (
-        <section className="bg-forest-50/60 py-6 sm:py-8">
+        <section className="bg-forest-50/60 py-4 sm:py-5">
           <div className="container-page">
             <div className="flex flex-wrap items-end justify-between gap-3">
               <div>
@@ -92,7 +92,7 @@ export default async function HomePage() {
               </Link>
             </div>
 
-            <div className="mt-4">
+            <div className="mt-3">
               <ProductSlider
                 products={allProducts.map((p) => ({
                   id: p.id,
@@ -113,7 +113,7 @@ export default async function HomePage() {
               />
             </div>
 
-            <div className="mt-3 text-center sm:hidden">
+            <div className="mt-2 text-center sm:hidden">
               <Link href="/products" className="btn-primary !px-5 !py-2 !text-xs">
                 View All Products <ArrowRight size={12} />
               </Link>
