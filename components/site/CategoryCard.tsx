@@ -21,7 +21,7 @@ export function CategoryCard({
       <div
         className={cn(
           "relative w-full overflow-hidden bg-forest-50",
-          compact ? "aspect-[12/5]" : "aspect-[4/3]"
+          compact ? "aspect-[3/1]" : "aspect-[4/3]"
         )}
       >
         <Image
@@ -41,13 +41,13 @@ export function CategoryCard({
           {name}
         </h3>
       </div>
-      <div className={compact ? "p-2" : "p-5"}>
-        <p className={cn("text-forest-500 line-clamp-2", compact ? "text-xs" : "text-sm")}>{description}</p>
+      <div className={compact ? "p-1.5" : "p-5"}>
+        <p className={cn("text-forest-500", compact ? "line-clamp-1 text-xs" : "line-clamp-2 text-sm")}>{description}</p>
         <Link
           href={`/categories/${slug}`}
           className={cn(
             "inline-flex items-center gap-1.5 font-semibold text-forest-700 hover:text-forest-900",
-            compact ? "mt-1 text-xs" : "mt-4 text-sm"
+            compact ? "mt-0.5 text-xs" : "mt-4 text-sm"
           )}
         >
           Explore Products <ArrowRight size={compact ? 12 : 16} />

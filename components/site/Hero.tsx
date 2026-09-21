@@ -40,7 +40,7 @@ export function Hero({ slides }: { slides: HeroSlide[] }) {
       <Leaf className="animate-float absolute left-[20%] bottom-[10%] hidden text-forest-400/20 sm:block" size={28} style={{ animationDelay: "4s" }} />
 
       <div className="container-page relative flex min-h-[150px] flex-col justify-center py-3 sm:min-h-[165px] sm:py-3.5">
-        <div className="max-w-2xl">
+        <div className="max-w-3xl">
           <Image
             src="/brand/logo-emblem.jpg"
             alt="PJR Farm emblem"
@@ -54,14 +54,14 @@ export function Hero({ slides }: { slides: HeroSlide[] }) {
           <h1 className="font-display text-2xl font-bold leading-tight text-cream-100 sm:text-3xl lg:text-4xl">
             {slide.title}
           </h1>
-          <p className="mt-1 max-w-xl text-sm text-cream-300 sm:text-base">{slide.subtitle}</p>
+          <p className="mt-1 max-w-2xl text-sm text-cream-300 sm:text-base">{slide.subtitle}</p>
 
-          <div className="mt-2 flex flex-wrap gap-3">
-            <Link href={slide.buttonLink || "/products"} className="btn-gold !px-5 !py-2.5 !text-sm">
+          <div className="mt-1.5 flex flex-wrap gap-2.5">
+            <Link href={slide.buttonLink || "/products"} className="btn-gold !px-4 !py-2 !text-sm">
               {slide.buttonText || "Shop Fresh Products"}
             </Link>
             {slide.buttonLink !== "/our-farming" && (
-              <Link href="/our-farming" className="btn-secondary !border-cream-100 !px-5 !py-2.5 !text-sm !text-cream-100 hover:!bg-cream-100 hover:!text-forest-900">
+              <Link href="/our-farming" className="btn-secondary !border-cream-100 !px-4 !py-2 !text-sm !text-cream-100 hover:!bg-cream-100 hover:!text-forest-900">
                 Explore Our Farm
               </Link>
             )}

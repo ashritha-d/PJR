@@ -36,7 +36,7 @@ body {
 }
 
 .section-subheading-compact {
-  @apply text-forest-600 mt-1 max-w-2xl text-sm;
+  @apply text-forest-600 mt-1 max-w-3xl text-sm;
 }
 
 .btn-primary {

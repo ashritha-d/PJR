@@ -65,7 +65,7 @@ export function ProductCard({
 
       <Link
         href={`/products/${product.slug}`}
-        className={cn("relative block w-full overflow-hidden bg-forest-50", compact ? "aspect-[16/9]" : "aspect-square")}
+        className={cn("relative block w-full overflow-hidden bg-forest-50", compact ? "aspect-[2/1]" : "aspect-square")}
       >
         <Image
           src={product.image || "/placeholders/vegetables.svg"}
@@ -83,7 +83,7 @@ export function ProductCard({
         )}
       </Link>
 
-      <div className={cn("flex flex-1 flex-col", compact ? "gap-0.5 p-1.5" : "gap-1.5 p-4")}>
+      <div className={cn("flex flex-1 flex-col", compact ? "gap-0 p-1.5" : "gap-1.5 p-4")}>
         <span className={cn("font-medium uppercase tracking-wide text-gold-dark", compact ? "text-[10px]" : "text-xs")}>
           {product.categoryName}
         </span>
@@ -95,7 +95,7 @@ export function ProductCard({
         {!compact && <p className="line-clamp-2 text-xs text-forest-500">{product.description}</p>}
         <StarRating rating={product.ratingAvg} count={compact ? undefined : product.ratingCount} size={compact ? 10 : 14} />
 
-        <div className={cn("flex items-baseline gap-1.5", compact ? "mt-0.5" : "mt-1 gap-2")}>
+        <div className={cn("flex items-baseline gap-1.5", compact ? "mt-0" : "mt-1 gap-2")}>
           <span className={cn("font-display font-bold text-forest-800", compact ? "text-sm" : "text-lg")}>
             {formatCurrency(price)}
           </span>
@@ -107,7 +107,7 @@ export function ProductCard({
           {!compact && <span className="text-xs text-forest-500">/ {product.unit}</span>}
         </div>
 
-        <div className={cn("flex gap-2", compact ? "mt-1" : "mt-2")}>
+        <div className={cn("flex", compact ? "mt-0.5 gap-1.5" : "mt-2 gap-2")}>
           <button
             disabled={outOfStock}
             onClick={() =>
