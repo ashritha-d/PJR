@@ -25,9 +25,9 @@ export function Hero({ slides }: { slides: HeroSlide[] }) {
   const slide = slides[index];
 
   return (
-    <section className="relative overflow-hidden bg-forest-900">
+    <section className="relative overflow-hidden bg-forest-600">
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-forest-900 via-forest-800 to-forest-700" />
+        <div className="absolute inset-0 bg-gradient-to-br from-forest-700 via-forest-600 to-forest-500" />
         <div
           className="absolute inset-0 opacity-[0.15]"
           style={{ backgroundImage: "url('/brand/leaf-pattern.svg')", backgroundSize: "220px" }}
