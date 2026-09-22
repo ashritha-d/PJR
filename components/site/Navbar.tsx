@@ -45,14 +45,14 @@ export function Navbar({
 
   return (
     <header className="sticky top-0 z-50 border-b border-forest-100 bg-cream-100/95 backdrop-blur">
-      <div className="container-page flex h-20 items-center justify-between gap-4">
+      <div className="container-page flex h-16 items-center justify-between gap-4">
         <Link href="/" className="flex shrink-0 items-center gap-2">
           <Image
             src="/brand/logo-horizontal.jpg"
             alt={businessName}
             width={220}
             height={56}
-            className="h-12 w-auto object-contain sm:h-14"
+            className="h-10 w-auto object-contain sm:h-11"
             priority
           />
         </Link>
