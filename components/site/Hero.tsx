@@ -39,7 +39,7 @@ export function Hero({ slides }: { slides: HeroSlide[] }) {
       <Leaf className="animate-float absolute right-[12%] top-[50%] hidden text-gold/20 sm:block" size={34} style={{ animationDelay: "2s" }} />
       <Leaf className="animate-float absolute left-[20%] bottom-[10%] hidden text-forest-400/20 sm:block" size={28} style={{ animationDelay: "4s" }} />
 
-      <div className="container-page relative flex min-h-[110px] flex-col justify-center py-2 sm:min-h-[125px] sm:py-2.5">
+      <div className="container-page relative flex min-h-[110px] flex-col justify-center gap-3 py-2 sm:min-h-[125px] sm:flex-row sm:items-center sm:justify-between sm:py-2.5">
         <div className="max-w-3xl">
           <div className="mb-0.5 flex items-center gap-2">
             <Image
@@ -57,17 +57,17 @@ export function Hero({ slides }: { slides: HeroSlide[] }) {
             {slide.title}
           </h1>
           <p className="mt-0.5 max-w-2xl text-sm text-cream-300 sm:text-base">{slide.subtitle}</p>
+        </div>
 
-          <div className="mt-1 flex flex-wrap gap-2.5">
-            <Link href={slide.buttonLink || "/products"} className="btn-gold !px-4 !py-1.5 !text-sm">
-              {slide.buttonText || "Shop Fresh Products"}
+        <div className="flex flex-wrap gap-2.5 sm:shrink-0">
+          <Link href={slide.buttonLink || "/products"} className="btn-gold !px-4 !py-1.5 !text-sm">
+            {slide.buttonText || "Shop Fresh Products"}
+          </Link>
+          {slide.buttonLink !== "/our-farming" && (
+            <Link href="/our-farming" className="btn-secondary !border-cream-100 !px-4 !py-1.5 !text-sm !text-cream-100 hover:!bg-cream-100 hover:!text-forest-900">
+              Explore Our Farm
             </Link>
-            {slide.buttonLink !== "/our-farming" && (
-              <Link href="/our-farming" className="btn-secondary !border-cream-100 !px-4 !py-1.5 !text-sm !text-cream-100 hover:!bg-cream-100 hover:!text-forest-900">
-                Explore Our Farm
-              </Link>
-            )}
-          </div>
+          )}
         </div>
       </div>
     </section>
