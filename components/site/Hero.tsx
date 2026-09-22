@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronLeft, ChevronRight, Leaf } from "lucide-react";
+import { Leaf } from "lucide-react";
 
 export type HeroSlide = {
   title: string;
@@ -70,37 +70,6 @@ export function Hero({ slides }: { slides: HeroSlide[] }) {
           </div>
         </div>
       </div>
-
-      {slides.length > 1 && (
-        <div className="absolute bottom-2 right-3 flex items-center gap-2">
-          <button
-            onClick={() => setIndex((i) => (i - 1 + slides.length) % slides.length)}
-            className="rounded-full bg-white/10 p-2 text-cream-100 backdrop-blur hover:bg-white/20"
-            aria-label="Previous slide"
-          >
-            <ChevronLeft size={18} />
-          </button>
-          <div className="flex gap-1.5">
-            {slides.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setIndex(i)}
-                aria-label={`Go to slide ${i + 1}`}
-                className={`h-1.5 rounded-full transition-all ${
-                  i === index ? "w-6 bg-gold" : "w-1.5 bg-white/40"
-                }`}
-              />
-            ))}
-          </div>
-          <button
-            onClick={() => setIndex((i) => (i + 1) % slides.length)}
-            className="rounded-full bg-white/10 p-2 text-cream-100 backdrop-blur hover:bg-white/20"
-            aria-label="Next slide"
-          >
-            <ChevronRight size={18} />
-          </button>
-        </div>
-      )}
     </section>
   );
 }
